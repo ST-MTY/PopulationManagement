@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mh.mapper.EmployeeMapper">
+    <sql id="table_name">t_emp</sql>
+    <sql id="select_fields">
+        emp_id,emp_name,emp_email,gender,department_id
+    </sql>
+    <sql id="select_withDept_fields">
+        emp_id,emp_name,emp_email,gender,department_id,dept_id,dept_name,dept_leader
+    </sql>
+
+    <resultMap id="empResult" type="com.mh.pojo.Employee">
+        <id column="emp_id" property="empId"></id>
+        <result column="emp_name" property="empName"></result>
+        <result column="emp_email" property="empEmail"></result>
+        <result column="gender" property="gender"></result>
+        <result column="department_id" property="departmentId"></result>
+    </resultMap>
+    <resultMap id="withDeptEmpResult" type="com.mh.pojo.Employee">
+        <id column="emp_id" property="empId"></id>
+        <result column="emp_name" property="empName"></result>
+        <result column="emp_email" property="emp_email"></result>
+        <result column="gender" property="gender"></result>
+        <result column="department_id" property="departmentId"></result>
+        <association property="department" column="department_id" javaType="com.mh.pojo.Department">
+            <id property="deptId" column="dept_id"></id>
+            <result property="deptName" column="dept_name"></result>
+            <result property="deptLeader" column="dept_leader"></result>
+        </association>
+    </resultMap>
+
+    <update id="updateEmpById">
+        update
+        <include refid="table_name"></include>
+        set emp_email=#{empEmail},gender=#{gender}, department_id = #{departmentId}
+        where emp_id=#{empId}
+    </update>
+
+    <select id="selectOneById" resultMap="empResult">
+        select <include refid="select_fields"></include>
+        from <include refid="table_name"></include>
+        where emp_id=#{empId}
+    </select>
+
+    <select id="selectOneByName" resultMap="empResult">
+        select <include refid="select_fields"></include>
+        from <include refid="table_name"></include>
+        where emp_name=#{empName  }
+    </select>
+
+    <select id="selectWithDeptById" resultMap="withDeptEmpResult">
+        select <include refid="select_withDept_fields"></include>
+        from t_emp e,t_dept d
+        where e.id = d.id and e.id = #{empId}
+    </select>
+
+    <select id="selectByLimitAndOffset" resultMap="empResult">
+        select <include refid="select_fields"></include>
+        from <include refid="table_name"></include>
+        limit #{offset}, #{limit}
+    </select>
+
+</mapper>

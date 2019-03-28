@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mh.mapper.DepartmentMapper">
+    <sql id="table_name">
+        t_dept
+    </sql>
+
+    <resultMap id="deptResult" type="com.mh.pojo.Department">
+        <id property="deptId" column="dept_id"></id>
+        <result property="deptName" column="dept_name"></result>
+        <result property="deptLeader" column="dept_leader"></result>
+    </resultMap>
+
+    <select id="selectDeptsByLimitAndOffset" resultMap="deptResult">
+        select * from <include refid="table_name"></include> limit #{offset},#{limit}
+    </select>
+
+    <update id="updateDeptById" parameterType="com.mh.pojo.Department">
+        update <include refid="table_name"></include> set dept_name=#{department.deptName} dept_Leader =
+        #{department.leaderName} where dept_id=#{deptId}
+    </update>
+</mapper>
