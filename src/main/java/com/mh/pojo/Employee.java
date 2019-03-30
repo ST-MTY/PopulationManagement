@@ -60,12 +60,6 @@ public class Employee {
     public Employee() {
     }
 
-    public Employee(String empName, String empEmail, String gender, Integer departmentId) {
-        this.empName = empName;
-        this.empEmail = empEmail;
-        this.gender = gender;
-        this.departmentId = departmentId;
-    }
 
     public Employee(Integer empId, String empName, String empEmail, String gender, Integer departmentId, Department department) {
         this.empId = empId;

@@ -33,7 +33,7 @@
     <update id="updateEmpById">
         update
         <include refid="table_name"></include>
-        set emp_email=#{empEmail},gender=#{gender}, department_id = #{departmentId}
+        set emp_email=#{employee.empEmail},gender=#{employee.gender}, department_id = #{employee.departmentId}
         where emp_id=#{empId}
     </update>
 
@@ -46,7 +46,7 @@
     <select id="selectOneByName" resultMap="empResult">
         select <include refid="select_fields"></include>
         from <include refid="table_name"></include>
-        where emp_name=#{empName  }
+        where emp_name=#{empName}
     </select>
 
     <select id="selectWithDeptById" resultMap="withDeptEmpResult">

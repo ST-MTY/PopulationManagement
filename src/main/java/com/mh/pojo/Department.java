@@ -32,6 +32,20 @@ public class Department {
     public Department() {
     }
 
+    @Override
+    public String toString() {
+        return "Department{" +
+                "deptId=" + deptId +
+                ", deptName='" + deptName + '\'' +
+                ", deptLeader='" + deptLeader + '\'' +
+                '}';
+    }
+
+    public Department(String deptName, String deptLeader) {
+        this.deptName = deptName;
+        this.deptLeader = deptLeader;
+    }
+
     public Department(Integer deptId, String deptName, String deptLeader) {
         this.deptId = deptId;
         this.deptName = deptName;

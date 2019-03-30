@@ -54,7 +54,7 @@
                     </div>
                     <nav aria-label="Page navigation" class="pull-right">
                         <ul class="pagination">
-                            <li><a href="/hrms/dept/getDeptList?pageNo=1">首页</a></li>
+                            <li><a href="/getDeptList?pageNo=1">首页</a></li>
                             <c:if test="${curPageNo==1}">
                                 <li class="disabled">
                                     <a href="#" aria-label="Previous" class="prePage">
@@ -72,10 +72,10 @@
 
                             <c:forEach begin="1" end="${totalPages<5?totalPages:5}" step="1" var="itemPage">
                                 <c:if test="${curPageNo == itemPage}">
-                                    <li class="active"><a href="/hrms/dept/getDeptList?pageNo=${itemPage}">${itemPage}</a></li>
+                                    <li class="active"><a href="/getDeptList?pageNo=${itemPage}">${itemPage}</a></li>
                                 </c:if>
                                 <c:if test="${curPageNo != itemPage}">
-                                    <li><a href="/hrms/dept/getDeptList?pageNo=${itemPage}">${itemPage}</a></li>
+                                    <li><a href="/getDeptList?pageNo=${itemPage}">${itemPage}</a></li>
                                 </c:if>
                             </c:forEach>
 
@@ -93,7 +93,7 @@
                                     </a>
                                 </li>
                             </c:if>
-                            <li><a href="/hrms/dept/getDeptList?pageNo=${totalPages}">尾页</a></li>
+                            <li><a href="/getDeptList?pageNo=${totalPages}">尾页</a></li>
                         </ul>
                     </nav>
                 </div>
@@ -116,14 +116,14 @@
     $(".prePage").click(function () {
          if (curPageNo > 1){
              var pageNo = curPageNo - 1;
-             $(this).attr("href", "/hrms/dept/getDeptList?pageNo="+pageNo);
+             $(this).attr("href", "/getDeptList?pageNo="+pageNo);
          }
     });
     //下一页
     $(".nextPage").click(function () {
         if (curPageNo < totalPages){
             var pageNo = curPageNo + 1;
-            $(this).attr("href", "/hrms/dept/getDeptList?pageNo="+pageNo);
+            $(this).attr("href", "/getDeptList?pageNo="+pageNo);
         }
     });
 
@@ -135,12 +135,12 @@
         var curPageNo = ${curPageNo};
         if (confirm("确认删除【"+ delDeptName +"】的信息吗？")){
             $.ajax({
-                url:"/hrms/dept/delDept/"+delDeptId,
+                url:"/delDept/"+delDeptId,
                 type:"DELETE",
                 success:function (result) {
                     if (result.code == 100){
                         alert("删除成功！");
-                        window.location.href = "/hrms/dept/getDeptList?pageNo="+curPageNo;
+                        window.location.href = "/getDeptList?pageNo="+curPageNo;
                     }else {
                         alert(result.extendInfo.del_dept_error);
                     }

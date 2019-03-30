@@ -14,7 +14,7 @@ public interface DepartmentMapper {
     /**
      * 删除
      */
-    @Delete("delete from " + TABLE_NAME + " where id = #{deptId}")
+    @Delete("delete from " + TABLE_NAME + " where dept_id = #{deptId}")
     int deleteDeptById(@Param("deptId") Integer deptId);
 
     /**
@@ -25,7 +25,7 @@ public interface DepartmentMapper {
     /**
      * 插入
      */
-    @Insert("insert into " + TABLE_NAME + " values(" + INSERT_FIELDS + ")" + "values(#{department.deptName},#{department.leader}")
+    @Insert("insert into " + TABLE_NAME + "(" + INSERT_FIELDS + ")" + "values(#{deptName},#{deptLeader})")
     int insertDept(Department department);
 
 

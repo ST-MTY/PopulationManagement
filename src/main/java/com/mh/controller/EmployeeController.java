@@ -5,10 +5,7 @@ import com.mh.service.EmployeeService;
 import com.mh.util.JsonMsg;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.swing.*;
@@ -100,13 +97,13 @@ public class EmployeeController {
 
     /**
      * 新增员工
-     *
      * @param employee
      * @return
      */
     @RequestMapping("/addEmp")
     @ResponseBody
     public JsonMsg addEmp(Employee employee) {
+        System.out.println(employee.toString());
         int res = employeeService.addEmp(employee);
         if (res == 1) {
             return JsonMsg.success();
@@ -132,7 +129,7 @@ public class EmployeeController {
         }else return JsonMsg.fail();
     }
 
-    @RequestMapping("/updateEmp/{empId}")
+    @RequestMapping(value = "/updateEmp/{empId}",method = RequestMethod.PUT)
     @ResponseBody
     public JsonMsg updateEmp(@PathVariable("empId") Integer empId, Employee employee){
         int res = employeeService.updateEmpById(empId,employee);
